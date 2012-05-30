@@ -39,6 +39,12 @@
 		"sms": true,
 		"tabs": true,
 		"tools": true,
-        "topbar": true
+        "topbar": true,
+        "modules": {
+            "package_names": {
+                "ios": "com.betterthantomorrow.teamspirit",
+                "android": "com.betterthantomorrow.teamspirit"
+            }
+        }
 	}
 }

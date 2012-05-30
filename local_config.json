@@ -4,7 +4,7 @@
 	"ios": {
 		"profiles": {
 			"DEFAULT": {
-				"provisioning_profile": ""
+				"provisioning_profile": "/Users/pez/Dropbox/PEZ/Apps/Provisioning/Team_Spirit_dev.mobileprovision"
 			}
 		}
 	},

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!-- Conditional comment for mobile ie7 blogs.msdn.com/b/iemobile/ -->
+<!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <html>
     <head>
         <title>Team Spirit</title>
@@ -7,6 +10,14 @@
         <script type="text/javascript" src="resources/jquery.min.js"></script>
         <script type="text/javascript" src="resources/mustache.js"></script>
         <script type="text/javascript" src="js/team_spirit.js"></script>
+        <meta name="description" content="">
+
+        <!-- Mobile viewport optimization h5bp.com/ad -->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
     </head>
     <body>
         <script type="x-mustache-template" id="department_list_tmpl">
