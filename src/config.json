@@ -34,10 +34,11 @@
 		"notification": true,
 		"prefs": true,
 		"request": {
-			"permissions": []
+			"permissions": ["http://winning-culture.appspot.com/*"]
 		},
 		"sms": true,
 		"tabs": true,
-		"tools": true
+		"tools": true,
+        "topbar": true
 	}
 }
