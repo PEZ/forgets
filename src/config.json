@@ -46,5 +46,11 @@
                 "android": "com.betterthantomorrow.teamspirit"
             }
         }
-	}
+	},
+    "partners": {
+        "parse": {
+            "applicationId": "CjO6mYLfX4zoK9biphdppxtCQ8qULf0WGUuchsAp",
+            "clientKey": "S3hnnuAppYZzjpuXNIkxiYZed6NzHMY0fbAKyxtu"
+        }
+    }
 }

@@ -6,10 +6,6 @@ var DEPARTMENT = 'Projectplace';
 var rater_id;
 
 
-function formatImgSrc(imgURL) {
-    return 'resources/'+/[a-z_]*.gif/.exec(imgURL)[0];
-};
-
 function getComments(department, callback){
     forge.logging.log('[getComments] getting comments for'+department);
     forge.request.ajax({
@@ -21,8 +17,8 @@ function getComments(department, callback){
         error: function(jqXHR, textStatus, errorThrown){
             forge.logging.log('ERROR! [getComments] '+textStatus);
         }
-    })
-};
+    });
+}
 
 function getTeamSpirit(department, callback){
     forge.logging.log('[getTeamSpirit] getting team spirit for'+department);
@@ -35,8 +31,8 @@ function getTeamSpirit(department, callback){
         error: function(jqXHR, textStatus, errorThrown){
             forge.logging.log('ERROR! [getTeamSpirit] '+textStatus);
         }
-    })
-};
+    });
+}
 
 function addLocalSpirit(spirit, comment) {
     forge.logging.log('beginning inserting comment');
@@ -52,7 +48,7 @@ function populateComments(comments_json) {
     var output = Mustache.to_html(tmpl, {comments: comments_json.comments});
     $('#comments ul').append(output);
     forge.logging.log('finished populating comments');
-};
+}
 
 function populateTeamSpirit(department, team_spirit_json) {
     forge.logging.log('beginning populating team spirit');
@@ -102,7 +98,7 @@ function getRaterFromPrefs() {
             } else {
                 rater_id = '';
             }
-            initRater()
+            initRater();
         },
         function (error) {
             forge.logging.error('failed when retrieving rater_id prefs');
@@ -118,4 +114,7 @@ $(function () {
     });
     getTeamSpirit(DEPARTMENT, populateTeamSpirit);
     getComments(DEPARTMENT, populateComments);
+    forge.event.messagePushed.addListener(function (msg) {
+        alert(msg.alert);
+    });
 });
