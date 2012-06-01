@@ -4,7 +4,8 @@
 	"ios": {
 		"profiles": {
 			"DEFAULT": {
-				"provisioning_profile": "/Users/pez/Dropbox/PEZ/Apps/Provisioning/Team_Spirit_Forge_dev.mobileprovision"
+				"provisioning_profile": "/Users/pez/Dropbox/PEZ/Apps/Provisioning/Team_Spirit_Forge_dev.mobileprovision",
+				"developer_certificate": "iPhone Developer: Peter Stromberg (42W53LZB79)"
 			}
 		}
 	},

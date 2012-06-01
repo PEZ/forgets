@@ -1,6 +1,7 @@
 window.forge.enableDebug();
 
 var API_PREFIX = "http://winning-culture.appspot.com/api";
+//var API_PREFIX = "http://localhost:8080/api";
 var DEPARTMENT = 'Projectplace';
 
 var rater_id;
@@ -103,18 +104,47 @@ function getRaterFromPrefs() {
         function (error) {
             forge.logging.error('failed when retrieving rater_id prefs');
             rater_id = '';
-        }
-        );
+        });
 }
 
+function pushSubscribe() {
+    var channel = 
+    forge.prefs.get('isSubScribed_' + DEPARTMENT,
+        function(resource) {
+            if (!resource) {
+                parse.push.subscribe(DEPARTMENT,
+                function() { // success
+                    forge.prefs.set('isSubScribed_' + DEPARTMENT, true)
+                    forge.logging.log('[pushSubscribe] subscribing: ' + DEPARTMENT);
+                },
+                function(content) { // error
+                    forge.logging.log('[pushSubscribe] error subscribing: ' + content);
+                });
+            }
+            else {
+                forge.logging.log('Already subscribed to: ' + DEPARTMENT);
+            }
+        });
+}
+
+function refreshFromServer() {
+    forge.logging.log('[refreshFromServer] start');
+    getTeamSpirit(DEPARTMENT, populateTeamSpirit);
+    getComments(DEPARTMENT, populateComments);
+}
+
+forge.logging.log('[before ready function] start]');
 $(function () {
+    forge.logging.log('[Ready function] start]');
+    //pushSubscribe();
     getRaterFromPrefs();
     $('#my_spirit_button').click(function(e) {
         updateSpirit($('#my_spirit').val(), $('#my_spirit_comment').val());
+        refreshFromServer();
     });
-    getTeamSpirit(DEPARTMENT, populateTeamSpirit);
-    getComments(DEPARTMENT, populateComments);
     forge.event.messagePushed.addListener(function (msg) {
         alert(msg.alert);
+        refreshFromServer();
     });
+    refreshFromServer();
 });
