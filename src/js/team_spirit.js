@@ -47,7 +47,7 @@ function populateComments(comments_json) {
     forge.logging.log('beginning populating comments');
     var tmpl = $('#comments_tmpl').html();
     var output = Mustache.to_html(tmpl, {comments: comments_json.comments});
-    $('#comments ul').append(output);
+    $('#comments ul').html(output);
     forge.logging.log('finished populating comments');
 }
 
@@ -55,7 +55,7 @@ function populateTeamSpirit(department, team_spirit_json) {
     forge.logging.log('beginning populating team spirit');
     var tmpl = $('#team_spirit_tmpl').html();
     var output = Mustache.to_html(tmpl, {'department': department, 'spirit': team_spirit_json.average_rating});
-    $('#team_spirit').append(output);
+    $('#team_spirit').html(output);
     forge.logging.log('done populating team spirit');
 }
 
@@ -112,7 +112,8 @@ function pushSubscribe() {
     forge.prefs.get('isSubScribed_' + DEPARTMENT,
         function(resource) {
             if (!resource) {
-                parse.push.subscribe(DEPARTMENT,
+                forge.logging.log('[pushSubscribe] before subscribe: ' + DEPARTMENT);
+                forge.parse.push.subscribe(DEPARTMENT,
                 function() { // success
                     forge.prefs.set('isSubScribed_' + DEPARTMENT, true)
                     forge.logging.log('[pushSubscribe] subscribing: ' + DEPARTMENT);
@@ -136,11 +137,12 @@ function refreshFromServer() {
 forge.logging.log('[before ready function] start]');
 $(function () {
     forge.logging.log('[Ready function] start]');
-    //pushSubscribe();
+    pushSubscribe();
     getRaterFromPrefs();
     $('#my_spirit_button').click(function(e) {
         updateSpirit($('#my_spirit').val(), $('#my_spirit_comment').val());
-        refreshFromServer();
+        $('#my_spirit').val('');
+        getTeamSpirit(DEPARTMENT, populateTeamSpirit);
     });
     forge.event.messagePushed.addListener(function (msg) {
         alert(msg.alert);

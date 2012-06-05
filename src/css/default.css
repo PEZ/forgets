@@ -1,3 +1,7 @@
+#spirit {
+    font-size: 32px;
+}
+
 #comments {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
